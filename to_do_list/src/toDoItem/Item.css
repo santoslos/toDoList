@@ -1,0 +1,26 @@
+li {
+    margin-top: 10px;
+}
+
+.contentItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.textSupprot {
+    position: relative;
+    left: 0px;
+    opacity: 0;
+    -webkit-transition: opacity 2s; /* For Safari 3.1 to 6.0 */
+    transition: opacity 2s;
+    margin: 0;
+
+
+}
+
+.list-group:hover .textSupprot {
+    opacity: 1;
+
+}

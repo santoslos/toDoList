@@ -1,0 +1,13 @@
+.App {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    height: 100%;
+    align-items: center;
+}
+.content {
+
+    background-color: lightgray;
+    padding: 10px;
+}
