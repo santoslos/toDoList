@@ -1,12 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
-function randomInteger(min, max) {
-  const rand = min - 0.5 + Math.random() * (max - min + 1);
-  return Math.round(rand);
-}
-
-export default function useTodos() {
-  const [todo, setTodo] = useState('');
+export function useTodos() {
   const [todos, setTodos] = useState(() => {
     const savedTodos = localStorage.getItem('todos');
     if (savedTodos) {
@@ -21,26 +15,20 @@ export default function useTodos() {
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
-  const inputChange = (e) => {
-    setTodo(e.target.value);
-  };
-  const formSubmit = (e) => {
-    e.preventDefault();
-    if (todo !== '') {
-      setTodos([
-        ...todos, {
-
-          id: todos.length + randomInteger(1, 550000),
-          text: todo.trim(),
-        },
-      ]);
+  const addToDo = (newTodoText) => {
+    if (newTodoText !== '') {
+      setTodos(() => (
+        [
+          ...todos, {
+            id: todos.length ? todos[todos.length - 1].id + 1 : 0,
+            text: newTodoText.trim(),
+          },
+        ]));
     }
-    setTodo('');
   };
   const deleteToDo = (id) => {
     const removeItems = todos.filter((todoTrue) => todoTrue.id !== id);
     setTodos(removeItems);
-    setUpdateTodo({});
   };
 
   const activateEditMode = (todoUpdate) => {
@@ -67,12 +55,10 @@ export default function useTodos() {
   const filtersMap = useMemo(() => todos.filter((x) => x.text.includes(valueInput)),
     [valueInput, todos]);
   return {
-    todo,
     updateTodo,
     editMode,
     filtersMap,
-    inputChange,
-    formSubmit,
+    addToDo,
     deleteToDo,
     activateEditMode,
     updateText,

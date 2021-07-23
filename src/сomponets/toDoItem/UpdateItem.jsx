@@ -9,6 +9,7 @@ const UpdateItem = ({
     value={updateTodoText}
     onBlur={() => deactivateEditMode(todoId)}
     onChange={updateText}
+    autoFocus={true}
   />
 );
 UpdateItem.propTypes = {

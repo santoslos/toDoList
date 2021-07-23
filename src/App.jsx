@@ -1,14 +1,14 @@
 import './App.css';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Form from './сomponets/toDoForm/Form';
+import NewTodoForm from './сomponets/toDoForm/NewTodoForm';
 import Item from './сomponets/toDoItem/Item';
 import Filter from './сomponets/fillterInput/Filter';
-import useTodos from './hooks/useTodos';
+import { useTodos } from './hooks/useTodos';
 
 function App() {
   const {
-    todo, updateTodo, editMode, filtersMap, inputChange, formSubmit,
+    updateTodo, editMode, filtersMap, addToDo,
     deleteToDo, activateEditMode, updateText, deactivateEditMode, changeValueFilter,
   } = useTodos();
 
@@ -16,18 +16,16 @@ function App() {
 
     <div className="App">
       <div className="content">
-        <Form
-          formSubmit={formSubmit}
-          textTodo={todo}
-          inputChange={inputChange}
+        <NewTodoForm
+          addToDo={addToDo}
         />
-        <Filter changeValueFilter={changeValueFilter} />
+        <Filter onChange={changeValueFilter} />
         <ul className="list-group">
           <p className="textSupprot"> Для обновление задачи, нажмите по ней два раза</p>
           {
-                        filtersMap.map((filterToDO) => (
+                        filtersMap.map((todo) => (
                           <Item
-                            filterToDO={filterToDO}
+                            todo={todo}
                             editMode={editMode}
                             activateEditMode={activateEditMode}
                             deleteToDo={deleteToDo}

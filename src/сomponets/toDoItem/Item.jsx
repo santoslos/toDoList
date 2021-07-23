@@ -5,33 +5,33 @@ import UpdateItem from './UpdateItem';
 import './Item.css';
 
 const Item = ({
-  filterToDO, editMode, activateEditMode, deleteToDo,
+  todo, editMode, activateEditMode, deleteToDo,
   updateTodo, deactivateEditMode, updateText,
 }) => (
 
-  <li key={filterToDO.id} className="list-group-item">
+  <li key={todo.id} className="list-group-item">
     {!editMode
       ? (
         <ContentItem
           activateEditMode={activateEditMode}
-          todo={filterToDO}
+          todo={todo}
           deleteToDo={deleteToDo}
         />
       )
 
-      : filterToDO.id === updateTodo.id
+      : todo.id === updateTodo.id
         ? (
           <UpdateItem
             deactivateEditMode={deactivateEditMode}
             updateTodoText={updateTodo.text}
-            todoId={filterToDO.id}
+            todoId={todo.id}
             updateText={updateText}
           />
         )
         : (
           <ContentItem
             activateEditMode={activateEditMode}
-            todo={filterToDO}
+            todo={todo}
             deleteToDo={deleteToDo}
           />
         )}
@@ -40,7 +40,7 @@ const Item = ({
 Item.propTypes = {
   deactivateEditMode: PropTypes.func.isRequired,
   editMode: PropTypes.bool.isRequired,
-  filterToDO: PropTypes.shape({
+  todo: PropTypes.shape({
     id: PropTypes.number,
     text: PropTypes.string,
   }).isRequired,
