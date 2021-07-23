@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Filter = (props) => {
-  const { onChange } = props;
+const Filter = ({ onChange }) => {
+  const handlerOnChange = (e) => {
+    onChange(e.currentTarget.value);
+  };
   return (
     <div>
       <h2>Поиск</h2>
-      <input placeholder="Поиск" onChange={onChange} />
+      <input placeholder="Поиск" onChange={handlerOnChange} />
     </div>
   );
 };

@@ -1,21 +1,18 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
-const UpdateItem = ({
-  deactivateEditMode, updateTodoText, todoId, updateText,
-}) => (
+const UpdateItem = ({ toggleEditMode, updateText, textUpdateItem }) => (
   <input
     type="text"
-    value={updateTodoText}
-    onBlur={() => deactivateEditMode(todoId)}
+    value={textUpdateItem}
+    onBlur={toggleEditMode}
     onChange={updateText}
-    autoFocus={true}
+    autoFocus
   />
 );
 UpdateItem.propTypes = {
-  deactivateEditMode: PropTypes.func.isRequired,
-  todoId: PropTypes.number.isRequired,
-  updateTodoText: PropTypes.string.isRequired,
+  toggleEditMode: PropTypes.func.isRequired,
   updateText: PropTypes.func.isRequired,
+  textUpdateItem: PropTypes.string.isRequired,
+
 };
 export default UpdateItem;

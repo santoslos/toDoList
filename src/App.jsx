@@ -8,8 +8,8 @@ import { useTodos } from './hooks/useTodos';
 
 function App() {
   const {
-    updateTodo, editMode, filtersMap, addToDo,
-    deleteToDo, activateEditMode, updateText, deactivateEditMode, changeValueFilter,
+    filtersMap, addToDo,
+    removeToDo, changeValueFilter, updateToDo,
   } = useTodos();
 
   return (
@@ -26,12 +26,8 @@ function App() {
                         filtersMap.map((todo) => (
                           <Item
                             todo={todo}
-                            editMode={editMode}
-                            activateEditMode={activateEditMode}
-                            deleteToDo={deleteToDo}
-                            updateTodo={updateTodo}
-                            deactivateEditMode={deactivateEditMode}
-                            updateText={updateText}
+                            deleteToDo={removeToDo}
+                            updateToDo={updateToDo}
                           />
                         ))
                     }
