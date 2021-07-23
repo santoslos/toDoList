@@ -2,14 +2,14 @@ import React from 'react';
 import './Item.css';
 import PropTypes from 'prop-types';
 
-const ContentItem = ({ toggleEditMode, todo, deleteToDo }) => (
+const ContentItem = ({ toggleEditMode, todo, removeToDo }) => (
   <div
     className="contentItem"
     onDoubleClick={toggleEditMode}
   >
     <span>{todo.text}</span>
     <button
-      onClick={() => deleteToDo(todo.id)}
+      onClick={() => removeToDo(todo.id)}
       type="button"
       className="btn btn-danger"
     >
@@ -24,6 +24,6 @@ ContentItem.propTypes = {
     id: PropTypes.number,
     text: PropTypes.string,
   }).isRequired,
-  deleteToDo: PropTypes.func.isRequired,
+  removeToDo: PropTypes.func.isRequired,
 };
 export default ContentItem;

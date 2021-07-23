@@ -31,7 +31,7 @@ const Item = ({
           <ContentItem
             toggleEditMode={() => { toggleEditMode(todo, editMode); }}
             todo={todo}
-            deleteToDo={removeToDo}
+            removeToDo={removeToDo}
           />
         )
 
@@ -47,7 +47,7 @@ const Item = ({
             <ContentItem
               toggleEditMode={() => { toggleEditMode(todo, editMode); }}
               todo={todo}
-              deleteToDo={removeToDo}
+              removeToDo={removeToDo}
             />
           )}
     </li>
