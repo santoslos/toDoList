@@ -2,10 +2,10 @@ import React from 'react';
 import './Item.css';
 import PropTypes from 'prop-types';
 
-const ContentItem = ({ activateEditMode, todo, deleteToDo }) => (
+const ContentItem = ({ toggleEditMode, todo, deleteToDo }) => (
   <div
     className="contentItem"
-    onDoubleClick={() => activateEditMode(todo)}
+    onDoubleClick={toggleEditMode}
   >
     <span>{todo.text}</span>
     <button
@@ -19,7 +19,7 @@ const ContentItem = ({ activateEditMode, todo, deleteToDo }) => (
 
 );
 ContentItem.propTypes = {
-  activateEditMode: PropTypes.func.isRequired,
+  toggleEditMode: PropTypes.func.isRequired,
   todo: PropTypes.shape({
     id: PropTypes.number,
     text: PropTypes.string,

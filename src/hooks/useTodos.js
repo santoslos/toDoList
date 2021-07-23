@@ -27,7 +27,7 @@ export function useTodos() {
     const removeItems = todos.filter((todoTrue) => todoTrue.id !== id);
     setTodos(removeItems);
   };
-  const changeValueFilter = (newValueInput) => {
+  const onChangeValueFilter = (newValueInput) => {
     setValueInput(newValueInput);
   };
   const updateToDo = (updateItem) => {
@@ -35,13 +35,13 @@ export function useTodos() {
     setTodos(updateTodos);
   };
 
-  const filtersMap = useMemo(() => todos.filter((x) => x.text.includes(valueInput)),
+  const filteredTodos = useMemo(() => todos.filter((x) => x.text.includes(valueInput)),
     [valueInput, todos]);
   return {
-    filtersMap,
+    filteredTodos,
     addToDo,
     removeToDo,
-    changeValueFilter,
+    onChangeValueFilter,
     updateToDo,
 
   };

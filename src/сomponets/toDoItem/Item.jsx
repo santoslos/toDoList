@@ -5,7 +5,7 @@ import UpdateItem from './UpdateItem';
 import './Item.css';
 
 const Item = ({
-  todo, deleteToDo,
+  todo, removeToDo,
   updateToDo,
 }) => {
   const [updateItem, setUpdateItem] = useState(null);
@@ -31,7 +31,7 @@ const Item = ({
           <ContentItem
             toggleEditMode={() => { toggleEditMode(todo, editMode); }}
             todo={todo}
-            deleteToDo={deleteToDo}
+            deleteToDo={removeToDo}
           />
         )
 
@@ -45,9 +45,9 @@ const Item = ({
           )
           : (
             <ContentItem
-              activateEditMode={() => { toggleEditMode(todo, editMode); }}
+              toggleEditMode={() => { toggleEditMode(todo, editMode); }}
               todo={todo}
-              deleteToDo={deleteToDo}
+              deleteToDo={removeToDo}
             />
           )}
     </li>
@@ -59,6 +59,6 @@ Item.propTypes = {
     text: PropTypes.string,
   }).isRequired,
   updateToDo: PropTypes.func.isRequired,
-  deleteToDo: PropTypes.func.isRequired,
+  removeToDo: PropTypes.func.isRequired,
 };
 export default Item;

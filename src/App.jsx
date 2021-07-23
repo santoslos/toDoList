@@ -8,8 +8,8 @@ import { useTodos } from './hooks/useTodos';
 
 function App() {
   const {
-    filtersMap, addToDo,
-    removeToDo, changeValueFilter, updateToDo,
+    filteredTodos, addToDo,
+    removeToDo, onChangeValueFilter, updateToDo,
   } = useTodos();
 
   return (
@@ -19,14 +19,14 @@ function App() {
         <NewTodoForm
           addToDo={addToDo}
         />
-        <Filter onChange={changeValueFilter} />
+        <Filter onChange={onChangeValueFilter} />
         <ul className="list-group">
           <p className="textSupprot"> Для обновление задачи, нажмите по ней два раза</p>
           {
-                        filtersMap.map((todo) => (
+                        filteredTodos.map((todo) => (
                           <Item
                             todo={todo}
-                            deleteToDo={removeToDo}
+                            removeToDo={removeToDo}
                             updateToDo={updateToDo}
                           />
                         ))
