@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const NewTodoForm = ({ addToDo }) => {
+const NewTodoForm = ({ addTodo }) => {
 
   const [newTodoText, setTodoText] = useState('');
   const onChange = (e) => {
@@ -10,7 +10,7 @@ const NewTodoForm = ({ addToDo }) => {
 
   const submitHander = (e) => {
     e.preventDefault();
-    addToDo(newTodoText);
+    addTodo(newTodoText);
     setTodoText('');
   };
 
@@ -28,6 +28,6 @@ const NewTodoForm = ({ addToDo }) => {
 };
 
 NewTodoForm.propTypes = {
-  addToDo: PropTypes.func.isRequired,
+  addTodo: PropTypes.func.isRequired,
 };
 export default NewTodoForm;

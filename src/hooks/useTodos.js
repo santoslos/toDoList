@@ -15,7 +15,7 @@ export function useTodos() {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  const addToDo = (newTodoText) => {
+  const addTodo = (newTodoText) => {
     if (newTodoText !== '') {
       setTodos(() => (
         [
@@ -28,7 +28,7 @@ export function useTodos() {
     }
   };
 
-  const removeToDo = (id) => {
+  const removeTodo = (id) => {
     const removeItems = todos.filter((todoTrue) => todoTrue.id !== id);
     setTodos(removeItems);
   };
@@ -37,7 +37,7 @@ export function useTodos() {
     setValueInput(newValueInput);
   };
 
-  const updateToDo = (updateItem) => {
+  const updateTodo = (updateItem) => {
     const updateTodos = todos.map((todoUp) => (todoUp.id === updateItem.id ? updateItem : todoUp));
     setTodos(updateTodos);
   };
@@ -47,10 +47,10 @@ export function useTodos() {
 
   return {
     filteredTodos,
-    addToDo,
-    removeToDo,
+    addTodo,
+    removeTodo,
     onChangeValueFilter,
-    updateToDo,
+    updateTodo,
 
   };
 }

@@ -9,8 +9,8 @@ import { useTodos } from './hooks/useTodos';
 function App() {
 
   const {
-    filteredTodos, addToDo,
-    removeToDo, onChangeValueFilter, updateToDo,
+    filteredTodos, addTodo,
+    removeTodo, onChangeValueFilter, updateTodo,
   } = useTodos();
 
   return (
@@ -18,7 +18,7 @@ function App() {
     <div className="App">
       <div className="content">
         <NewTodoForm
-          addToDo={addToDo}
+          addTodo={addTodo}
         />
         <Filter onChange={onChangeValueFilter} />
         <ul className="list-group">
@@ -27,8 +27,8 @@ function App() {
                         filteredTodos.map((todo) => (
                           <Item key={todo.id}
                             todo={todo}
-                            removeToDo={removeToDo}
-                            updateToDo={updateToDo}
+                            removeTodo={removeTodo}
+                            updateTodo={updateTodo}
                           />
                         ))
                     }
