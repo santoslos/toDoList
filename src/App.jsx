@@ -7,6 +7,7 @@ import Filter from './сomponets/fillterInput/Filter';
 import { useTodos } from './hooks/useTodos';
 
 function App() {
+
   const {
     filteredTodos, addToDo,
     removeToDo, onChangeValueFilter, updateToDo,
@@ -24,7 +25,7 @@ function App() {
           <p className="textSupprot"> Для обновление задачи, нажмите по ней два раза</p>
           {
                         filteredTodos.map((todo) => (
-                          <Item
+                          <Item key={todo.id}
                             todo={todo}
                             removeToDo={removeToDo}
                             updateToDo={updateToDo}

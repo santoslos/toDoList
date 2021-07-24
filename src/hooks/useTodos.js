@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
 export function useTodos() {
+
   const [todos, setTodos] = useState(() => {
     const savedTodos = localStorage.getItem('todos');
     if (savedTodos) {
@@ -8,10 +9,12 @@ export function useTodos() {
     }
     return [];
   });
+
   const [valueInput, setValueInput] = useState('');
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
+
   const addToDo = (newTodoText) => {
     if (newTodoText !== '') {
       setTodos(() => (
@@ -20,16 +23,20 @@ export function useTodos() {
             id: todos.length ? todos[todos.length - 1].id + 1 : 0,
             text: newTodoText.trim(),
           },
-        ]));
+        ]
+      ));
     }
   };
+
   const removeToDo = (id) => {
     const removeItems = todos.filter((todoTrue) => todoTrue.id !== id);
     setTodos(removeItems);
   };
+
   const onChangeValueFilter = (newValueInput) => {
     setValueInput(newValueInput);
   };
+
   const updateToDo = (updateItem) => {
     const updateTodos = todos.map((todoUp) => (todoUp.id === updateItem.id ? updateItem : todoUp));
     setTodos(updateTodos);
@@ -37,6 +44,7 @@ export function useTodos() {
 
   const filteredTodos = useMemo(() => todos.filter((x) => x.text.includes(valueInput)),
     [valueInput, todos]);
+
   return {
     filteredTodos,
     addToDo,

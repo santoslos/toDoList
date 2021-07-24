@@ -8,48 +8,42 @@ const Item = ({
   todo, removeToDo,
   updateToDo,
 }) => {
+
   const [updateItem, setUpdateItem] = useState(null);
-  const [editMode, setEditMode] = useState(false);
+
   const updateText = (e) => {
     if (updateItem) {
       setUpdateItem({ ...updateItem, text: e.currentTarget.value });
     }
   };
-  const toggleEditMode = (toDoUpdate, enable) => {
-    if (!enable) {
-      setUpdateItem(toDoUpdate);
-      setEditMode(true);
-    } else {
+
+  const toggleEditMode = (edit) => {
+    if (edit) {
+      setUpdateItem(todo);
+    }
+    else {
       updateToDo(updateItem);
-      setEditMode(false);
+      setUpdateItem(null);
     }
   };
+
   return (
     <li key={todo.id} className="list-group-item">
-      {!editMode
+      {!updateItem
         ? (
           <ContentItem
-            toggleEditMode={() => { toggleEditMode(todo, editMode); }}
+            toggleEditMode={toggleEditMode}
             todo={todo}
             removeToDo={removeToDo}
           />
         )
-
-        : todo.id === updateItem.id
-          ? (
-            <UpdateItem
-              toggleEditMode={() => { toggleEditMode(todo, editMode); }}
-              updateText={updateText}
-              textUpdateItem={updateItem.text}
-            />
-          )
-          : (
-            <ContentItem
-              toggleEditMode={() => { toggleEditMode(todo, editMode); }}
-              todo={todo}
-              removeToDo={removeToDo}
-            />
-          )}
+        : (
+          <UpdateItem
+            toggleEditMode={toggleEditMode}
+            updateText={updateText}
+            textUpdateItem={updateItem.text}
+          />
+        )}
     </li>
   );
 };

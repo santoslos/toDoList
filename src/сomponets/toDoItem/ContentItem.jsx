@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 const ContentItem = ({ toggleEditMode, todo, removeToDo }) => (
   <div
     className="contentItem"
-    onDoubleClick={toggleEditMode}
+    onDoubleClick={() => { toggleEditMode(true); }}
   >
+
     <span>{todo.text}</span>
     <button
       onClick={() => removeToDo(todo.id)}
@@ -18,6 +19,7 @@ const ContentItem = ({ toggleEditMode, todo, removeToDo }) => (
   </div>
 
 );
+
 ContentItem.propTypes = {
   toggleEditMode: PropTypes.func.isRequired,
   todo: PropTypes.shape({
@@ -26,4 +28,5 @@ ContentItem.propTypes = {
   }).isRequired,
   removeToDo: PropTypes.func.isRequired,
 };
+
 export default ContentItem;
