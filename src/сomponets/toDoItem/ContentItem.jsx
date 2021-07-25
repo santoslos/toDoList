@@ -1,22 +1,30 @@
 import React from 'react';
-import './Item.css';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const ContentItemStyle = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const Button = styled.button.attrs({
+  className : 'btn btn-danger',
+})``;
 
 const ContentItem = ({ toggleEditMode, todo, removeTodo }) => (
-  <div
-    className="contentItem"
+  <ContentItemStyle
     onDoubleClick={() => { toggleEditMode(true); }}
   >
 
     <span>{todo.text}</span>
-    <button
+    <Button
       onClick={() => removeTodo(todo.id)}
       type="button"
-      className="btn btn-danger"
     >
       X
-    </button>
-  </div>
+    </Button>
+  </ContentItemStyle>
 
 );
 

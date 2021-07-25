@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ContentItem from './ContentItem';
 import UpdateItem from './UpdateItem';
-import './Item.css';
+import styled from 'styled-components';
+
+const StileItem = styled.li.attrs({
+  className : 'list-group-item',
+})
+`margin-top: 10px;`;
 
 const Item = ({
   todo, removeTodo,
   updateTodo,
 }) => {
-
   const [updateItem, setUpdateItem] = useState(null);
 
   const updateText = (e) => {
@@ -28,7 +32,7 @@ const Item = ({
   };
 
   return (
-    <li key={todo.id} className="list-group-item">
+    <StileItem key={todo.id} >
       {!updateItem
         ? (
           <ContentItem
@@ -44,9 +48,10 @@ const Item = ({
             textUpdateItem={updateItem.text}
           />
         )}
-    </li>
+    </StileItem>
   );
 };
+
 Item.propTypes = {
   todo: PropTypes.shape({
     id: PropTypes.number,
