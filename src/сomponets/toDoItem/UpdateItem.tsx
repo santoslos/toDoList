@@ -1,7 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const UpdateItem = ({ toggleEditMode, updateText, textUpdateItem }) => (
+export interface UpdateItemProps {
+  toggleEditMode: (enable: boolean) => void;
+  updateText: (e : React.ChangeEvent<HTMLInputElement>) => void;
+  textUpdateItem: string;
+}
+
+const UpdateItem = ({ toggleEditMode, updateText, textUpdateItem }: UpdateItemProps) => (
   <input
     type="text"
     value={textUpdateItem}

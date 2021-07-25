@@ -1,3 +1,4 @@
+// @ts-ignore
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NewTodoForm from './сomponets/toDoForm/NewTodoForm';
@@ -5,6 +6,8 @@ import Item from './сomponets/toDoItem/Item';
 import Filter from './сomponets/fillterInput/Filter';
 import { useTodos } from './hooks/useTodos';
 import styled from 'styled-components';
+
+
 
 const Main = styled.div`
     text-align: center;
@@ -41,7 +44,6 @@ function App() {
     filteredTodos, addTodo,
     removeTodo, onChangeValueFilter, updateTodo,
   } = useTodos();
-
   return (
 
     <Main>

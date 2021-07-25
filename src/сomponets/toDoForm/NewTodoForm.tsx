@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const NewTodoForm = ({ addTodo }) => {
+interface FormAddProps {
+  addTodo:( newTextTodo : string ) => void
+}
+const NewTodoForm = ({ addTodo }: FormAddProps) => {
 
   const [newTodoText, setTodoText] = useState('');
-  const onChange = (e) => {
+  const onChange = (e : React.ChangeEvent<HTMLInputElement>) => {
     setTodoText(e.target.value);
   };
 
-  const submitHander = (e) => {
+  const submitHander = (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     addTodo(newTodoText);
     setTodoText('');

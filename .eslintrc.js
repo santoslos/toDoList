@@ -1,21 +1,34 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    node: true,
+    es2020: true,
   },
-  extends: [
-    'plugin:@web-bee-ru/react',
-  ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 12,
-    sourceType: 'module',
   },
-  plugins: [
-    'react',
+  plugins: ['@typescript-eslint', 'react', 'prettier', 'unicorn'],
+  extends: [
+    'plugin:@web-bee-ru/react',
   ],
-  rules: {
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: [['~', './src/']],
+        extensions: ['.ts', '.js', '.tsx'],
+      },
+    },
   },
+  rules: {
+    'react/jsx-key': ['error', {
+      checkFragmentShorthand: true,
+    }],
+  },
+  overrides: [
+  ],
 };

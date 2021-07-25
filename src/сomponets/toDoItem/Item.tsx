@@ -1,41 +1,49 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import ContentItem from './ContentItem';
+import ContentItmex from './ContentItmex';
 import UpdateItem from './UpdateItem';
 import styled from 'styled-components';
+import { Todo } from '../../TypesTodo';
 
 const StileItem = styled.li.attrs({
-  className : 'list-group-item',
+  className: 'list-group-item',
 })
 `margin-top: 10px;`;
+
+export interface ItemProps {
+  todo: Todo;
+  removeTodo: (todoId: number) => void;
+  updateTodo: (Todo: Todo ) => void;
+}
 
 const Item = ({
   todo, removeTodo,
   updateTodo,
-}) => {
-  const [updateItem, setUpdateItem] = useState(null);
+} :ItemProps) => {
+  const [updateItem, setUpdateItem] = useState<Todo>({id:-1,
+    text:''});
 
-  const updateText = (e) => {
+  const updateText = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (updateItem) {
       setUpdateItem({ ...updateItem, text: e.currentTarget.value });
     }
   };
 
-  const toggleEditMode = (edit) => {
+  const toggleEditMode = (edit: boolean) => {
     if (edit) {
       setUpdateItem(todo);
     }
     else {
       updateTodo(updateItem);
-      setUpdateItem(null);
+      setUpdateItem({id:-1,text:''});
     }
   };
 
   return (
     <StileItem key={todo.id} >
-      {!updateItem
+      {!updateItem.text
         ? (
-          <ContentItem
+          <ContentItmex
             toggleEditMode={toggleEditMode}
             todo={todo}
             removeTodo={removeTodo}

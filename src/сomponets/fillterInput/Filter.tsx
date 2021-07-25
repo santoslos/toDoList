@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Filter = ({ onChange }) => {
+export interface FilterItemProps {
+    onChange : ( newValueInput: string ) => void
+}
 
-  const handlerOnChange = (e) => {
+const Filter = ( { onChange }: FilterItemProps) => {
+
+  const handlerOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
 
@@ -17,7 +21,6 @@ const Filter = ({ onChange }) => {
 
 Filter.propTypes = {
   onChange: PropTypes.func.isRequired,
-  valueInput: PropTypes.string.isRequired,
 };
 
 export default Filter;
