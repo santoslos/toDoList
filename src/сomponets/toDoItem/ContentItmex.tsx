@@ -1,6 +1,6 @@
-
+import React from 'react';
 import styled from 'styled-components';
-import { Todo } from '../../TypesTodo';
+import { Todo } from '../../types/TypesTodo';
 
 export interface ContentItemProps {
   toggleEditMode: (enable: boolean) => void;
@@ -15,23 +15,20 @@ const ContentItemStyle = styled.div`
 `;
 
 const Button = styled.button.attrs({
-  className : 'btn btn-danger',
+  className: 'btn btn-danger',
 })``;
 
-const ContentItmex  = ({ toggleEditMode, todo, removeTodo }: ContentItemProps) => (
+const ContentItmex = ({ toggleEditMode, todo, removeTodo }: ContentItemProps) => (
   <ContentItemStyle
-    onDoubleClick={() => { toggleEditMode(true); }}
+    onDoubleClick={() => {
+      toggleEditMode(true);
+    }}
   >
-
     <span>{todo.text}</span>
-    <Button
-      onClick={() => removeTodo(todo.id)}
-      type="button"
-    >
+    <Button onClick={() => removeTodo(todo.id)} type="button">
       X
     </Button>
   </ContentItemStyle>
-
 );
 
 export default ContentItmex;

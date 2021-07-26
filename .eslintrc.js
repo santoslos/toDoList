@@ -13,9 +13,7 @@ module.exports = {
     },
   },
   plugins: ['@typescript-eslint', 'react', 'prettier', 'unicorn'],
-  extends: [
-    'plugin:@web-bee-ru/react',
-  ],
+  extends: ['plugin:@web-bee-ru/react'],
   settings: {
     'import/resolver': {
       alias: {
@@ -25,10 +23,12 @@ module.exports = {
     },
   },
   rules: {
-    'react/jsx-key': ['error', {
-      checkFragmentShorthand: true,
-    }],
+    'react/jsx-key': [
+      'error',
+      {
+        checkFragmentShorthand: true,
+      },
+    ],
   },
-  overrides: [
-  ],
+  overrides: [],
 };

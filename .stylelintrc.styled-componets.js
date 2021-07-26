@@ -1,4 +1,4 @@
 module.exports = {
-    processors: ['stylelint-processor-styled-components'],
-    extends: ['./.stylelintrc'],
+  processors: ['stylelint-processor-styled-components'],
+  extends: ['./.stylelintrc'],
 };

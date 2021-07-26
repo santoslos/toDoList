@@ -1,9 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Todo } from 'TypesTodo';
-
+import { Todo } from 'types/TypesTodo';
 
 export function useTodos() {
-
   const [todos, setTodos] = useState<Todo[]>(() => {
     const savedTodos = localStorage.getItem('todos');
     if (savedTodos) {
@@ -18,20 +16,19 @@ export function useTodos() {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  const addTodo = (newTodoText:string):void => {
+  const addTodo = (newTodoText: string): void => {
     if (newTodoText !== '') {
-      setTodos(() => (
-        [
-          ...todos, {
-            id: todos.length ? todos[todos.length - 1].id + 1 : 0,
-            text: newTodoText.trim(),
-          },
-        ]
-      ));
+      setTodos(() => [
+        ...todos,
+        {
+          id: todos.length ? todos[todos.length - 1].id + 1 : 0,
+          text: newTodoText.trim(),
+        },
+      ]);
     }
   };
 
-  const removeTodo = (id: number):void => {
+  const removeTodo = (id: number): void => {
     const removeItems = todos.filter((todoTrue) => todoTrue.id !== id);
     setTodos(removeItems);
   };
@@ -45,8 +42,7 @@ export function useTodos() {
     setTodos(updateTodos);
   };
 
-  const filteredTodos  = useMemo(() => todos.filter((x) => x.text.includes(valueInput)),
-    [valueInput, todos]);
+  const filteredTodos = useMemo(() => todos.filter((x) => x.text.includes(valueInput)), [valueInput, todos]);
 
   return {
     filteredTodos,
@@ -54,6 +50,5 @@ export function useTodos() {
     removeTodo,
     onChangeValueFilter,
     updateTodo,
-
   };
 }
