@@ -20,9 +20,7 @@ const Content = styled.div`
   padding: 10px;
 `;
 
-const ListTodo = styled.ul.attrs({
-  className: 'list-group',
-})``;
+const ListTodo = styled.ul``;
 
 const TextSupport = styled.p`
   position: relative;
@@ -42,7 +40,7 @@ function App() {
       <Content>
         <NewTodoForm addTodo={addTodo} />
         <Filter onChange={onChangeValueFilter} />
-        <ListTodo>
+        <ListTodo className={'list-group'}>
           <TextSupport> Для обновление задачи, нажмите по ней два раза</TextSupport>
           {filteredTodos.map((todo) => (
             <Item key={todo.id} todo={todo} removeTodo={removeTodo} updateTodo={updateTodo} />
