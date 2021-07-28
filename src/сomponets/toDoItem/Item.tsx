@@ -5,7 +5,7 @@ import UpdateItem from './UpdateItem';
 import styled from 'styled-components';
 import { Todo } from '../../types/TypesTodo';
 
-const StileItem = styled.li`
+const StyleItem = styled.li`
   margin-top: 10px;
 `;
 
@@ -34,13 +34,13 @@ const Item = ({ todo, removeTodo, updateTodo }: ItemProps) => {
   };
 
   return (
-    <StileItem className={'list-group-item'} key={todo.id}>
+    <StyleItem className={'list-group-item'} key={todo.id}>
       {!updateItem ? (
         <ContentItmex toggleEditMode={toggleEditMode} todo={todo} removeTodo={removeTodo} />
       ) : (
         <UpdateItem toggleEditMode={toggleEditMode} updateText={updateText} textUpdateItem={updateItem.text} />
       )}
-    </StileItem>
+    </StyleItem>
   );
 };
 
