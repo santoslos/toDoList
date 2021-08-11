@@ -34,10 +34,11 @@ const TextSupport = styled.p`
 
 function App() {
   const { filteredTodos, addTodo, removeTodo, onChangeValueFilter, updateTodo, isValidating } = useTodos();
-
-  if (!isValidating && filteredTodos) {
-    return (
-      <Main>
+  return (
+    <Main>
+      {isValidating ? (
+        <Preloader />
+      ) : (
         <Content>
           <NewTodoForm addTodo={addTodo} />
           <Filter onChange={onChangeValueFilter} />
@@ -48,10 +49,9 @@ function App() {
             ))}
           </ListTodo>
         </Content>
-      </Main>
-    );
-  }
-  return <Preloader />;
+      )}
+    </Main>
+  );
 }
 
 export default App;
