@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 import axios from 'axios';
 import { Taxios } from '@simplesmiler/taxios';
 import { TodoStore } from '../TodoStore';
@@ -21,7 +21,7 @@ export function useTodos() {
   let { data, mutate, isValidating } = useSWR('/todo-list', getTodos);
   const [valueInput, setValueInput] = useState<string>('');
 
-  const addTodo = async (newTodoText: string) => {
+  const addTodo = useCallback(async (newTodoText: string) => {
     if (newTodoText !== '') {
       addPost('/todo-list', newTodoText).then((res) => {
         if (res.status === 201) {
@@ -29,21 +29,21 @@ export function useTodos() {
         }
       });
     }
-  };
+  }, []);
 
-  const removeTodo = async (id: number) => {
+  const removeTodo = useCallback(async (id: number) => {
     await taxios.delete('/todo-list/{id}', { params: { id: id } }).then((res) => {
       if (res.status === 200) {
         mutate(data, true);
       }
     });
-  };
+  }, []);
 
-  const onChangeValueFilter = (newValueInput: string): void => {
+  const onChangeValueFilter = useCallback((newValueInput: string): void => {
     setValueInput(newValueInput);
-  };
+  }, []);
 
-  const updateTodo = async (updateItem: Todo) => {
+  const updateTodo = useCallback(async (updateItem: Todo) => {
     if (Array.isArray(data) && data.some((todo) => JSON.stringify(todo) === JSON.stringify(updateItem))) {
       return;
     }
@@ -53,7 +53,7 @@ export function useTodos() {
         mutate(data, true);
       }
     });
-  };
+  }, []);
 
   const filteredTodos = useMemo(() => {
     if (Array.isArray(data)) {
