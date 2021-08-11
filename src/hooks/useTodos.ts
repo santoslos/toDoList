@@ -1,48 +1,66 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
+import axios from 'axios';
+import { Taxios } from '@simplesmiler/taxios';
+import { TodoStore } from '../TodoStore';
+import useSWR from 'swr';
 import { Todo } from 'types/TypesTodo';
 
-export function useTodos() {
-  const [todos, setTodos] = useState<Todo[]>(() => {
-    const savedTodos = localStorage.getItem('todos');
-    if (savedTodos) {
-      return JSON.parse(savedTodos);
-    }
-    return [];
-  });
+const taxios = new Taxios<TodoStore>(axios.create({ baseURL: 'http://localhost:3000' }));
 
+const getTodos = async (url: '/todo-list') => {
+  let response = await taxios.get(url);
+  return response.data;
+};
+
+const addPost = async (url: '/todo-list', dataText: string) => {
+  let response = await taxios.post(url, { textTodo: dataText });
+  return response;
+};
+
+export function useTodos() {
+  let { data, mutate, isValidating } = useSWR('/todo-list', getTodos);
   const [valueInput, setValueInput] = useState<string>('');
 
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
-
-  const addTodo = (newTodoText: string): void => {
+  const addTodo = async (newTodoText: string) => {
     if (newTodoText !== '') {
-      setTodos(() => [
-        ...todos,
-        {
-          id: todos.length ? todos[todos.length - 1].id + 1 : 0,
-          text: newTodoText.trim(),
-        },
-      ]);
+      addPost('/todo-list', newTodoText).then((res) => {
+        if (res.status === 201) {
+          mutate(data, true);
+        }
+      });
     }
   };
 
-  const removeTodo = (id: number): void => {
-    const removeItems = todos.filter((todoTrue) => todoTrue.id !== id);
-    setTodos(removeItems);
+  const removeTodo = async (id: number) => {
+    await taxios.delete('/todo-list/{id}', { params: { id: id } }).then((res) => {
+      if (res.status === 200) {
+        mutate(data, true);
+      }
+    });
   };
 
   const onChangeValueFilter = (newValueInput: string): void => {
     setValueInput(newValueInput);
   };
 
-  const updateTodo = (updateItem: Todo) => {
-    const updateTodos = todos.map((todoUp) => (todoUp.id === updateItem.id ? updateItem : todoUp));
-    setTodos(updateTodos);
+  const updateTodo = async (updateItem: Todo) => {
+    if (Array.isArray(data) && data.some((todo) => JSON.stringify(todo) === JSON.stringify(updateItem))) {
+      return;
+    }
+
+    taxios.put('/todo-list/{id}', { ...updateItem }, { params: { id: updateItem.id } }).then((res) => {
+      if (res.status === 200) {
+        mutate(data, true);
+      }
+    });
   };
 
-  const filteredTodos = useMemo(() => todos.filter((x) => x.text.includes(valueInput)), [valueInput, todos]);
+  const filteredTodos = useMemo(() => {
+    if (Array.isArray(data)) {
+      return data.filter((x) => x.textTodo.includes(valueInput));
+    }
+    return [];
+  }, [valueInput, data]);
 
   return {
     filteredTodos,
@@ -50,5 +68,6 @@ export function useTodos() {
     removeTodo,
     onChangeValueFilter,
     updateTodo,
+    isValidating,
   };
 }

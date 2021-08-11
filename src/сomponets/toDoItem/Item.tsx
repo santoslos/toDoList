@@ -7,6 +7,7 @@ import { Todo } from '../../types/TypesTodo';
 
 const StyleItem = styled.li`
   margin-top: 10px;
+  height: 55px;
 `;
 
 export interface ItemProps {
@@ -20,7 +21,7 @@ const Item = ({ todo, removeTodo, updateTodo }: ItemProps) => {
 
   const updateText = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (updateItem) {
-      setUpdateItem({ ...updateItem, text: e.currentTarget.value });
+      setUpdateItem({ ...updateItem, textTodo: e.currentTarget.value });
     }
   };
 
@@ -38,7 +39,7 @@ const Item = ({ todo, removeTodo, updateTodo }: ItemProps) => {
       {!updateItem ? (
         <ContentItmex toggleEditMode={toggleEditMode} todo={todo} removeTodo={removeTodo} />
       ) : (
-        <UpdateItem toggleEditMode={toggleEditMode} updateText={updateText} textUpdateItem={updateItem.text} />
+        <UpdateItem toggleEditMode={toggleEditMode} updateText={updateText} textUpdateItem={updateItem.textTodo} />
       )}
     </StyleItem>
   );
