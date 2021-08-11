@@ -24,7 +24,7 @@ const ContentItmex = ({ toggleEditMode, todo, removeTodo }: ContentItemProps) =>
       toggleEditMode(true);
     }}
   >
-    <span>{todo.text}</span>
+    <span>{todo.textTodo}</span>
     <Button onClick={() => removeTodo(todo.id)} type="button">
       X
     </Button>

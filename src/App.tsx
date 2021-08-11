@@ -5,13 +5,13 @@ import Item from './сomponets/toDoItem/Item';
 import Filter from './сomponets/fillterInput/Filter';
 import { useTodos } from './hooks/useTodos';
 import styled from 'styled-components';
+import Preloader from './сomponets/common/Preloader/Preloader';
 
 const Main = styled.div`
   text-align: center;
   display: flex;
   justify-content: center;
   margin-top: 10px;
-  height: 100%;
   align-items: center;
 `;
 
@@ -33,20 +33,23 @@ const TextSupport = styled.p`
 `;
 
 function App() {
-  const { filteredTodos, addTodo, removeTodo, onChangeValueFilter, updateTodo } = useTodos();
-
+  const { filteredTodos, addTodo, removeTodo, onChangeValueFilter, updateTodo, isValidating } = useTodos();
   return (
     <Main>
-      <Content>
-        <NewTodoForm addTodo={addTodo} />
-        <Filter onChange={onChangeValueFilter} />
-        <ListTodo className={'list-group'}>
-          <TextSupport> Для обновление задачи, нажмите по ней два раза</TextSupport>
-          {filteredTodos.map((todo) => (
-            <Item key={todo.id} todo={todo} removeTodo={removeTodo} updateTodo={updateTodo} />
-          ))}
-        </ListTodo>
-      </Content>
+      {isValidating ? (
+        <Preloader />
+      ) : (
+        <Content>
+          <NewTodoForm addTodo={addTodo} />
+          <Filter onChange={onChangeValueFilter} />
+          <ListTodo className={'list-group'}>
+            <TextSupport> Для обновление задачи, нажмите по ней два раза</TextSupport>
+            {filteredTodos.map((todo) => (
+              <Item key={todo.id} todo={todo} removeTodo={removeTodo} updateTodo={updateTodo} />
+            ))}
+          </ListTodo>
+        </Content>
+      )}
     </Main>
   );
 }

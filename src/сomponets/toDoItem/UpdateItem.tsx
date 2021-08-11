@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import styled from 'styled-components';
 
 export interface UpdateItemProps {
   toggleEditMode: (enable: boolean) => void;
@@ -7,8 +8,13 @@ export interface UpdateItemProps {
   textUpdateItem: string;
 }
 
+const StyleInput = styled.input`
+  height: 100%;
+  width: 100%;
+`;
+
 const UpdateItem = ({ toggleEditMode, updateText, textUpdateItem }: UpdateItemProps) => (
-  <input
+  <StyleInput
     type="text"
     value={textUpdateItem}
     onBlur={() => {
